@@ -2,6 +2,10 @@ stages:
  - install_dependencies
  - build
 
+variables:
+  # Set the public path of your Angular app
+  ANGULAR_PUBLIC_PATH: "/"
+
 install_dep:
   stage: install_dependencies
   image: node:20
@@ -26,3 +30,28 @@ build_ang:
       - node_modules/
       - ~/.pnpm-store/
     policy: pull
+
+deploy_to_pages:
+  stage: deploy
+  script:
+    - mv dist public
+    - echo "Deploying to GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  only:
+    - master  # Deploy only from the master branch, adjust as needed
+
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages"
+  dependencies:
+    - deploy_to_pages
+  artifacts:
+    paths:
+      - public
+  only:
+    - master  # Deploy only from the master branch, adjust as needed
+  variables:
+    GITLAB_PAGES: "true"
