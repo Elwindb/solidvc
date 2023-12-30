@@ -1,4 +1,4 @@
-image: node:14.17.0
+image: node:20
 
 stages:            # List of stages for jobs, and their order of execution
  - install_dependencies
@@ -8,8 +8,9 @@ stages:            # List of stages for jobs, and their order of execution
 
 install_dep:
   stage: install_dependencies
-  image: node:14
+  image: node:20
   script:
+  - apt install pnpm -y
   - pnpm install
 
 install_ang:
