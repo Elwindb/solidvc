@@ -17,6 +17,7 @@ build_ang:
   stage: build
   image: node:20
   script:
+    - npm install -g pnpm
     - pnpm install
     - pnpm run build
   cache:
