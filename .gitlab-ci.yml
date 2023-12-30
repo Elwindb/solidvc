@@ -10,8 +10,7 @@ install_dep:
   stage: install_dependencies
   image: node:20
   script:
-  - apt install pnpm -y
-  - pnpm install
+  - npm install -g pnpm
 
 install_ang:
   stage: install_angular
