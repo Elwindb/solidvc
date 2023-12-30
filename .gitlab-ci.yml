@@ -1,6 +1,6 @@
 stages:
- - build
- - deploy
+  - build
+  - deploy
 
 variables:
   # Set the public path of your Angular app
@@ -30,3 +30,21 @@ build_ang:
       - node_modules/
       - ~/.pnpm-store/
     policy: pull
+
+docker_build:
+  stage: deploy
+  script:
+    # Build Angular project
+    - ng build --prod
+
+    # Build Docker image
+    - docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+
+    # Login to Docker Hub
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin
+
+    # Push Docker image to Docker Hub
+    - docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+  only:
+    - master  # You can customize the branch for deployment
+
