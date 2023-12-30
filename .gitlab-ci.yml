@@ -11,6 +11,7 @@ install_dep:
   image: node:20
   script:
   - npm install -g pnpm
+  - pnpm install
 
 install_ang:
   stage: install_angular
