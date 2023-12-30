@@ -1,6 +1,7 @@
 stages:
  - install_dependencies
  - build
+ - deploy
 
 variables:
   # Set the public path of your Angular app
