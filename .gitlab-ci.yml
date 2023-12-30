@@ -1,26 +1,27 @@
-image: node:20
-
-stages:            # List of stages for jobs, and their order of execution
+stages:
  - install_dependencies
- - install_angular
  - build
- 
 
 install_dep:
   stage: install_dependencies
   image: node:20
   script:
-  - npm install -g pnpm
-  - pnpm install
-
-install_ang:
-  stage: install_angular
-  image: node:20
-  script:
-    - pnpm install @angular/cli @angular/compiler
+    - npm install -g pnpm
+    - pnpm install
+  cache:
+    paths:
+      - node_modules/
+      - ~/.pnpm-store/
 
 build_ang:
   stage: build
   image: node:20
   script:
-  - npm run build
+    - pnpm install
+    - pnpm run build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - ~/.pnpm-store/
+    policy: pull
