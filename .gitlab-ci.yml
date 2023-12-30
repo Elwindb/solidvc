@@ -1,5 +1,4 @@
 stages:
- - install_dependencies
  - build
  - deploy
 
@@ -8,7 +7,7 @@ variables:
   ANGULAR_PUBLIC_PATH: "/"
 
 install_dep:
-  stage: install_dependencies
+  stage: build
   image: node:20
   script:
     - npm install -g pnpm
