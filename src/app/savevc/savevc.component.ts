@@ -9,14 +9,23 @@ import { CredentialService } from '../credential-request.service';
   styleUrl: './savevc.component.css'
 })
 export class SavevcComponent {
-  inputText: string;
+    inputText: string = '';
 
-  constructor(private credentialService: CredentialService) {
-    this.inputText = credentialService.vc;
-  }
+    constructor(private credentialService: CredentialService) {
+      credentialService.vc.then((result) => {
 
-  saveText() {
-    // Implement your save logic here
-    console.log('Text saved:', this.inputText);
-  }
+        console.log(result);
+
+        this.inputText += JSON.stringify(result);
+      });
+      
+    }
+
+    saveText() {
+      // Implement your save logic here
+      console.log('Text saved:', this.inputText);
+    }
+
+
+
 }

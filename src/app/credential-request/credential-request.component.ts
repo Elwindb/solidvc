@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CredentialService } from '../credential-request.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credential-request',
@@ -12,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class CredentialRequestComponent {
   oidcRequest: string = '';
 
-  constructor(private credentialService: CredentialService) {}
+  constructor(private credentialService: CredentialService, private router: Router) {}
 
   
   ngOnInit(): void {
@@ -25,8 +26,9 @@ export class CredentialRequestComponent {
   }
 
   processOIDCRequest() {
-
     this.credentialService.startRequest(this.oidcRequest);
+
+    this.router.navigate(['/savevc']);
 
   }
 

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CredentialOfferClient, OpenID4VCIClient, MetadataClient, convertURIToJsonObject   } from '@sphereon/oid4vci-client';
-import { ProofOfPossessionCallbacks, Alg, JWTHeader, Jwt, JWTSignerCallback, CredentialOffer, ProofOfPossession, JWTHeaderParameters, OpenId4VCIVersion, JWTVerifyCallback } from '@sphereon/oid4vci-common';
+import { CredentialOfferClient, OpenID4VCIClient, MetadataClient   } from '@sphereon/oid4vci-client';
+import { ProofOfPossessionCallbacks, Alg, Jwt, JWTSignerCallback, JWTHeaderParameters } from '@sphereon/oid4vci-common';
 import * as Jose from 'jose'
 import * as multibase from 'multibase';
 import * as multicodec from 'multicodec';
@@ -11,12 +9,17 @@ import {  } from '@sphereon/oid4vci-common'; // Import the necessary module
   providedIn: 'root'
 })
 export class CredentialService {
-  vc: string | undefined;
+  vc: Promise<string>;
 
-  constructor() { }
+  constructor() {
+    this.vc = Promise.resolve('no vc has been requested yet');
+  }
 
-  public async startRequest(oidcRequest: string) {
-    this.vc = await testClient(oidcRequest) as string;
+  public startRequest(oidcRequest: string) {
+    this.vc = testClient(oidcRequest);
+    // testClient(oidcRequest).then((result) => {
+    //   this.vc += result; // This will log "Promise resolved with a value" after 2 seconds
+    // });
   }
 }
 
@@ -75,29 +78,14 @@ async function testClient(uri: string) {
     jti: '1234567890',
   });
 
-  console.log(credentialResponse.credential);
+  console.log(credentialResponse.credential as string);
 
-  return credentialResponse.credential;
+  return credentialResponse.credential as string;
 
 }
-//const  keypair  =  Jose.generateKeyPair(Alg.ES256);
-// Must be JWS
+
 async function signCallback(args: Jwt, kid: string): Promise<string> {
-  //generate keypair with options
 
-  //const { publicKey, privateKey } = await Jose.generateKeyPair(Alg.ES256);//, { crv: 'Ed25519' } );
-  //console.log(publicKey);
-  //const publicKey = await crypto.subtle.exportKey('spki', (await keypair).publicKey as CryptoKey);
-  //const publicKeyBase64URL = (publicKey);
-  //const publicKeyvalue = await crypto.subtle.exportKey('raw', publicKey as CryptoKey);
-
-
-
-// Now 'myString' contains the decoded string
-  //put the private key in a did of the setissuer
-  //const privateKeykeyPair = await crypto.subtle.generateKey({ name: 'RSASSA-PKCS1-v1_5' }, true, ['sign', 'verify']);
-  //const privateKey = await crypto.subtle.exportKey('raw', (await keypair).privateKey as CryptoKey);
-  //console.log((await keypair).privateKey);
 
   return await new Jose.SignJWT({ ...args.payload })
   .setProtectedHeader({ alg: args.header.alg, typ: 'openid4vci-proof+jwt', kid: kid })
