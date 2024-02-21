@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { writeFile } from 'fs/promises';
-import { getFile, isRawData, getContentType, getSourceUrl, Url} from "@inrupt/solid-client";
+import { getFile, isRawData, getContentType, getSourceUrl, Url, saveFileInContainer} from "@inrupt/solid-client";
 //import { verifiable } from "@transmute/vc.js/src/index";
 //import { SigningAlgo  } from '@sphereon/did-auth-siop/dist/index';
 
@@ -14,6 +14,27 @@ export class SolidclientService {
   public getHeroes(){
     readFileFromPod("https://elwin.solidweb.org/wallet/vc.jsonld");
     
+  }
+
+
+  public saveVc(vc: string){
+    saveVCinPod(vc);
+    
+  }
+
+}
+
+async function saveVCinPod(vc: string) {
+  try {
+    const blob = new Blob([vc], { type: "plain/text" });
+    const savedFile = await saveFileInContainer(
+      "https://elwin.solidweb.org/wallet/",
+      new File([blob], "vc", { type: "plain/text" }),
+      { slug: "suggestedFileName.txt", contentType: "text/plain",  fetch: window.fetch.bind(window) }
+    );
+
+  } catch (err) {
+    console.log(err);
   }
 
 }

@@ -54,11 +54,11 @@ dependencies:
     specifier: 0.5.0-unstable.8
     version: 0.5.0-unstable.8
   '@sphereon/oid4vci-client':
-    specifier: ^0.8.1
-    version: 0.8.1
+    specifier: ^0.9.0
+    version: 0.9.0
   '@sphereon/oid4vci-common':
-    specifier: ^0.8.1
-    version: 0.8.1
+    specifier: ^0.9.0
+    version: 0.9.0
   '@sphereon/sphereon-sdk.workspace':
     specifier: github:Sphereon-Opensource/SSI-SDK
     version: github.com/Sphereon-Opensource/SSI-SDK/9e3fc6ae652eea8f9a0e5193c9ecc813c8168db3
@@ -3693,6 +3693,24 @@ packages:
     resolution: {integrity: sha512-/+SgoRjLq7Xlf0CWuLHq2LUZeL/w65kfzAPG5NH9pcmBhs+nunQTn4gvdwgMTIXnt9b2C/1SeL2XiysZEyIC9Q==}
     dev: false
 
+  /@sd-jwt/decode@0.2.1:
+    resolution: {integrity: sha512-rs55WB3llrMObxN8jeMl06km/h0WivO9jSWNubO9JUIdlfrVhssU38xoXakvQeSDjAJkUUhfZcvmC2vNo1X6Wg==}
+    dependencies:
+      '@sd-jwt/types': 0.2.1
+      '@sd-jwt/utils': 0.2.1
+    dev: false
+
+  /@sd-jwt/types@0.2.1:
+    resolution: {integrity: sha512-nbNik/cq6UIMsN144FcgPZQzaqIsjEEj307j3ZSFORkQBR4Tsmcj54aswTuNh0Z0z/4aSbfw14vOKBZvRWyVLQ==}
+    dev: false
+
+  /@sd-jwt/utils@0.2.1:
+    resolution: {integrity: sha512-9eRrge44dhE3fenawR/RZGxP5iuW9DtgdOVANu/JK5PEl80r0fDsMwm/gDjuv8OgLDCmQ6uSaVte1lYaTG71bQ==}
+    dependencies:
+      '@sd-jwt/types': 0.2.1
+      buffer: 6.0.3
+    dev: false
+
   /@sigstore/bundle@2.1.0:
     resolution: {integrity: sha512-89uOo6yh/oxaU8AeOUnVrTdVMcGk9Q1hJa7Hkvalc6G3Z3CupWk4Xe9djSgJm9fMkH69s0P0cVHUoKSOemLdng==}
     engines: {node: ^16.14.0 || >=18.0.0}
@@ -3763,26 +3781,34 @@ packages:
       - encoding
     dev: false
 
-  /@sphereon/oid4vci-client@0.8.1:
-    resolution: {integrity: sha512-NhIxBDTvXRDl7du+z3Mnpm0VkxI1L/r1r4hJzz2Xdh1NKruzk5lkoLbRyq9uCc3rMg/RH8U+nkThrOE0TiwnRg==}
-    engines: {node: '>=16'}
+  /@sphereon/oid4vci-client@0.9.0:
+    resolution: {integrity: sha512-abRHNzIgm0Q/d9DOLPQZm6vlI4DQWxZti7i7lpt9rfzWNRKIGzIcGA9q2ZeZBCxpFXo9Egk85soYxkCOYtl5yQ==}
+    engines: {node: '>=18'}
     dependencies:
-      '@sphereon/oid4vci-common': 0.8.1
-      '@sphereon/ssi-types': 0.17.2
+      '@sphereon/oid4vci-common': 0.9.0
+      '@sphereon/ssi-types': 0.18.1
       cross-fetch: 3.1.8
       debug: 4.3.4
     transitivePeerDependencies:
       - encoding
+      - msrcrypto
       - supports-color
     dev: false
 
-  /@sphereon/oid4vci-common@0.8.1:
-    resolution: {integrity: sha512-lKdVjUIkd04Tpt9BLZ+N5mv2uhm4x1Qu5TFrYHBPzXCc0jNMnSWCN3yD0HjfdsW++unLaqAqifvM4iYY5NKSZg==}
-    engines: {node: '>=16'}
+  /@sphereon/oid4vci-common@0.9.0:
+    resolution: {integrity: sha512-ZGirkvoPlYyshnUTPFf87AmJFPLsiHE81Anep4zYdCsDxV927x/uag9LO7h+zen+5KsS9w6o579Afv4EjQzacg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      msrcrypto: ^1.5.8
+    peerDependenciesMeta:
+      msrcrypto:
+        optional: true
     dependencies:
-      '@sphereon/ssi-types': 0.17.2
+      '@sphereon/ssi-types': 0.18.1
       cross-fetch: 3.1.8
       jwt-decode: 3.1.2
+      sha.js: 2.4.11
+      uint8arrays: 3.1.1
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -3805,15 +3831,16 @@ packages:
       string.prototype.matchall: 4.0.10
     dev: false
 
-  /@sphereon/ssi-types@0.17.2:
-    resolution: {integrity: sha512-Qo1dkISavtPIe1WKZXZGyHvquoUvdUlDI0GLzb21clKFPuxbawXdlxpCqOh6NCNRfX7ohEeCUQdEA1PNBlnKYA==}
+  /@sphereon/ssi-types@0.17.5:
+    resolution: {integrity: sha512-hoQOkeOtshvIzNAG+HTqcKxeGssLVfwX7oILHJgs6VMb1GhR6QlqjMAxflDxZ/8Aq2R0I6fEPWmf73zAXY2X2Q==}
     dependencies:
       jwt-decode: 3.1.2
     dev: false
 
-  /@sphereon/ssi-types@0.17.5:
-    resolution: {integrity: sha512-hoQOkeOtshvIzNAG+HTqcKxeGssLVfwX7oILHJgs6VMb1GhR6QlqjMAxflDxZ/8Aq2R0I6fEPWmf73zAXY2X2Q==}
+  /@sphereon/ssi-types@0.18.1:
+    resolution: {integrity: sha512-uM0gb1woyc0R+p+qh8tVDi15ZWmpzo9BP0iBp/yRkJar7gAfgwox/yvtEToaH9jROKnDCwL3DDQCDeNucpMkwg==}
     dependencies:
+      '@sd-jwt/decode': 0.2.1
       jwt-decode: 3.1.2
     dev: false
 
@@ -7782,8 +7809,6 @@ packages:
       webpack: '*'
     peerDependenciesMeta:
       webpack:
-        optional: true
-      webpack-sources:
         optional: true
     dependencies:
       webpack: 5.89.0(esbuild@0.19.5)
