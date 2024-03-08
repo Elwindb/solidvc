@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CredentialOfferClient, OpenID4VCIClient, MetadataClient   } from '@sphereon/oid4vci-client';
-import { ProofOfPossessionCallbacks, Alg, Jwt, JWTSignerCallback, JWTHeaderParameters } from '@sphereon/oid4vci-common';
+import { ProofOfPossessionCallbacks, Alg, Jwt, JWTSignerCallback, JWTHeaderParameters, AuthorizationRequestOpts } from '@sphereon/oid4vci-common';
 import * as Jose from 'jose'
 import * as multibase from 'multibase';
 import * as multicodec from 'multicodec';
@@ -33,15 +33,33 @@ async function testClient(uri: string) {
 
   const metadataserver = await MetadataClient.retrieveAllMetadataFromCredentialOffer(initiationRequestWithUrl);
 
-  console.log(metadataserver);  
+  console.log(metadataserver);
+
+  const authorizationRequestOpts: AuthorizationRequestOpts = {
+    redirectUri: 'https://your-app.com/callback',
+    scope: 'read_user_profile openid',
+    //state: "blabla", // Function to generate a random string
+    //display: 'page', // Optional: Request the authorization server to display a full page for login
+    //prompt: 'consent', // Optional: Request the authorization server to prompt the user for consent if not already granted
+  };
 
   const client = await OpenID4VCIClient.fromURI({
     uri: uri,
+    createAuthorizationRequestURL: true,
+    authorizationRequest: authorizationRequestOpts,
     //kid: 'did:jwk:1235667890', // Our DID.  You can defer this also to when the acquireCredential method is called
     alg: Alg.EdDSA, // The signing Algorithm we will use. You can defer this also to when the acquireCredential method is called
     clientId: 'test-clientId', // The clientId if the Authrozation Service requires it.  If a clientId is needed you can defer this also to when the acquireAccessToken method is called
     retrieveServerMetadata: true, // Already retrieve the server metadata. Can also be done afterwards by invoking a method yourself.
   });
+
+  if (client.hasAuthorizationURL()) {
+    // Redirect the user to the authorization request URL
+    console.log('Authorization Code flow  supported');
+  } else {
+    // Handle cases where the offer doesn't support the Authorization Code flow
+    console.log('Authorization Code flow not supported');
+  }
 
   console.log(client.getIssuer()); // https://issuer.research.identiproof.io
   console.log(client.getCredentialEndpoint()); // https://issuer.research.identiproof.io/credential

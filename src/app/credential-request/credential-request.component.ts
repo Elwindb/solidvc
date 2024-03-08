@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CredentialService } from '../credential-request.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-credential-request',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatProgressSpinnerModule],
   templateUrl: './credential-request.component.html',
   styleUrl: './credential-request.component.css'
 })

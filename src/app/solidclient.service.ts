@@ -11,14 +11,19 @@ export class SolidclientService {
 
   constructor() { }
 
-  public getHeroes(){
-    readFileFromPod("https://elwin.solidweb.org/wallet/vc.jsonld");
+  public getCredentials(){
+    return readFileFromPod("https://elwin.solidweb.org/wallet/vc.jsonld");
     
   }
 
 
   public saveVc(vc: string){
-    saveVCinPod(vc);
+    return saveVCinPod(vc);
+    
+  }
+
+  public loadVCsFromPod(){
+    
     
   }
 
@@ -42,20 +47,23 @@ async function saveVCinPod(vc: string) {
 async function readFileFromPod(fileURL: string | Url) {
   try {
     // File (https://docs.inrupt.com/developer-tools/api/javascript/solid-client/modules/interfaces.html#file) is a Blob (see https://developer.mozilla.org/docs/Web/API/Blob)
-    const file = await getFile(
-      fileURL      // fetch from authenticated session
-    );
+    const file = await getFile(fileURL); // fetch from authenticated session
 
-    console.log( `Fetched a ${getContentType(file)} file from ${getSourceUrl(file)}.`);
+    console.log(`Fetched a ${getContentType(file)} file from ${getSourceUrl(file)}.`);
     console.log(`The file is ${isRawData(file) ? "not " : ""}a dataset.`);
-    console.log((await file.text()));
+    console.log(await file.text());
 
     const credential = file.text;
-    const jsoncredential:JSON = JSON.parse( await file.text());
+    const jsoncredential: JSON = JSON.parse(await file.text());
 
     console.log(jsoncredential);
+
+    return jsoncredential;
 
   } catch (err) {
     console.log(err);
   }
+
+  return null; // Add a return statement to handle the case when an error occurs
 }
+
