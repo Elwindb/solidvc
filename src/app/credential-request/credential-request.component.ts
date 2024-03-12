@@ -3,11 +3,16 @@ import { CredentialService } from '../credential-request.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-credential-request',
   standalone: true,
-  imports: [FormsModule, MatProgressSpinnerModule],
+  imports: [MatDividerModule, FormsModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
   templateUrl: './credential-request.component.html',
   styleUrl: './credential-request.component.css'
 })
