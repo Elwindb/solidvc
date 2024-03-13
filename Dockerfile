@@ -7,6 +7,8 @@ WORKDIR /app
 # Copy package.json
 COPY package.json ./
 
+RUN apt-get update && apt-get install -y git
+
 # Install dependencies with pnpm
 RUN npm install -g pnpm && pnpm install
 
