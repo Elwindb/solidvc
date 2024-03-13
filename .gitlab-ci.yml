@@ -40,5 +40,3 @@ deploy:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  # Login to DockerHub
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .  # Build the image
     - docker push $IMAGE_NAME:$IMAGE_TAG  # Push the image to DockerHub
-  only:
-    - tags  # Run the deploy stage only on tagged pushes (e.g., git push origin v1.0)
