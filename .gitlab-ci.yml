@@ -36,7 +36,9 @@ build_ang:
 
 deploy:
   stage: deploy
-  image: docker:dind
+  image: docker:latest
+  services:
+    - docker:dind
   script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  # Login to DockerHub
     - docker build -t $IMAGE_NAME:$IMAGE_TAG --host unix:///var/run/docker.sock .# Build the image
