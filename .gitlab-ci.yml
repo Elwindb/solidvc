@@ -37,6 +37,7 @@ build_ang:
 deploy:
   stage: deploy
   script:
+    - apk add --no-cache --virtual .build-deps docker  # Install Docker
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  # Login to DockerHub
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .  # Build the image
     - docker push $IMAGE_NAME:$IMAGE_TAG  # Push the image to DockerHub
