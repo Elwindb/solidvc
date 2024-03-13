@@ -5,6 +5,9 @@ stages:
 variables:
   # Set the public path of your Angular app
   ANGULAR_PUBLIC_PATH: "/"
+  # Replace with your details
+  IMAGE_NAME: elwindb/thustpod
+  IMAGE_TAG: latest
 
 install_dep:
   stage: build
@@ -31,4 +34,12 @@ build_ang:
       - ~/.pnpm-store/
     policy: pull
 
-
+deploy:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  # Login to DockerHub
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG . # Build the image
+    - docker push $IMAGE_NAME:$IMAGE_TAG  # Push the image to DockerHub
