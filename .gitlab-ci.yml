@@ -40,7 +40,7 @@ deploy:
   services:
     - docker:dind
   before_script:
-    - apk add --update git  # Install Git (assuming you're using Alpine-based Docker image)
+    - RUN apt-get update && apt-get install -y git
   script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  # Login to DockerHub
     - docker build -t $IMAGE_NAME:$IMAGE_TAG . # Build the image
