@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json ./
 
 # Install dependencies with npm (or pnpm if preferred)
-RUN apt-get update && apt-get install -y git && npm install -g @angular/cli && npm install
+RUN apt-get update && apt-get install -y git && pnpm install -g @angular/cli && pnpm install
 
 # Copy the rest of the project files (excluding node_modules)
 COPY . .
