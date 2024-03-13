@@ -1,5 +1,5 @@
 # Use a lightweight Node.js image
-FROM node:current-alpine AS build-step
+FROM node:latest
 
 # Set working directory
 WORKDIR /app
