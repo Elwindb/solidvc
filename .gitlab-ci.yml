@@ -39,5 +39,5 @@ deploy:
   image: docker:dind
   script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  # Login to DockerHub
-    - ocker build -t $IMAGE_NAME:$IMAGE_TAG .  # Build the image
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .  # Build the image
     - docker push $IMAGE_NAME:$IMAGE_TAG  # Push the image to DockerHub
