@@ -7,10 +7,10 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Install Angular CLI globally
-RUN npm install -g pnpm && pnpm install -g @angular/cli
+RUN npm install -g pnpm && pnpm setup && pnpm install -g @angular/cli
 
 # Install project dependencies
-RUN pnpm setup && pnpm install
+RUN pnpm install
 
 # Build the Angular application for production
 RUN ng build --prod
