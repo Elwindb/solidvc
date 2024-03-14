@@ -7,10 +7,10 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Install Angular CLI globally
-RUN npm install -g @angular/cli
+RUN npm install -g pnpm && pnpm install -g @angular/cli
 
 # Install project dependencies
-RUN npm install
+RUN pnpm install
 
 # Expose port 80 for serving the application
 EXPOSE 80
