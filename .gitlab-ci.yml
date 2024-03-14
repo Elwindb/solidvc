@@ -8,7 +8,7 @@ variables:
   # Replace with your details
   IMAGE_NAME: elwindb/thustpod
   IMAGE_TAG: latest
-  CI_SHELL: "/bin/bash"
+  CI_SHELL: "bash"
 
 install_dep:
   stage: build
