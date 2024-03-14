@@ -1,24 +1,29 @@
-FROM node:alpine
+# Use a slim Node.js base image
+FROM node:20-slim AS base
+
+# Set environment variable for pnpm store location
+ENV PNPM_HOME="/pnpm"
+
+# Add pnpm to PATH using corepack
+RUN corepack enable
+
+# Copy project files to working directory
+COPY . /app
 
 # Set working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-ENV SHELL sh
+# Install dependencies (production only)
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
-# Copy project files
-COPY . /usr/src/app
+# Build the Angular application
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm run build
 
-# Install Angular CLI globally
-RUN npm install -g pnpm && pnpm setup && pnpm install -g @angular/cli
-
-# Install project dependencies
-RUN pnpm install
-
-# Build the Angular application for production
-RUN ng build --prod
-
-# Expose port 80 for serving the application
-EXPOSE 80
-
-# Serve the built application using a simple HTTP server (serve package)
-CMD ["npx", "serve", "-s", "-l", "80", "dist"]
+# Final image (copy production build and start server)
+FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/dist /app/dist
+EXPOSE 4200
+CMD [ "pnpm", "start" ]
