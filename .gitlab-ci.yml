@@ -6,7 +6,7 @@ variables:
   # Set the public path of your Angular app
   ANGULAR_PUBLIC_PATH: "/"
   # Replace with your details
-  IMAGE_NAME: elwindb/thustpod
+  IMAGE_NAME: elwindb/trustpod
   IMAGE_TAG: latest
   SHELL: "bash"
 
