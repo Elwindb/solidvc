@@ -23,6 +23,8 @@ FROM base AS build
 # Install Angular CLI within the build stage
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install -D @angular/cli
 
+ENV PATH="${PATH}:/app/node_modules/.bin"
+
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm run build
 
 # Final image (copy production build and start server)
