@@ -19,7 +19,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-l
 
 # Build the Angular application
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 # Install Angular CLI within the build stage
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install -g @angular/cli
