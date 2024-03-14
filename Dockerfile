@@ -3,6 +3,8 @@ FROM node:alpine
 # Set working directory
 WORKDIR /usr/src/app
 
+ENV SHELL /bin/bash
+
 # Copy project files
 COPY . /usr/src/app
 
