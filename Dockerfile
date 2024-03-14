@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-c"]
 COPY . /usr/src/app
 
 # Install Angular CLI globally
-RUN sh -c "npm install -g pnpm && pnpm setup && pnpm install -g @angular/cli"
+RUN npm install -g pnpm && pnpm setup && pnpm install -g @angular/cli
 
 # Install project dependencies
 RUN pnpm install
