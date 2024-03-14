@@ -10,7 +10,7 @@ COPY . /usr/src/app
 RUN npm install -g pnpm && pnpm install -g @angular/cli
 
 # Install project dependencies
-RUN pnpm install
+RUN pnpm setup && pnpm install
 
 # Build the Angular application for production
 RUN ng build --prod
