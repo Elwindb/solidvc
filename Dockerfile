@@ -27,6 +27,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm run build
 
 # Final image (copy production build and start server)
 FROM base
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install -D @angular/cl
 COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
 EXPOSE 4200
