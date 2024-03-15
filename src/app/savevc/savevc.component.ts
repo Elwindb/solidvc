@@ -33,15 +33,10 @@ export class SavevcComponent {
       });
     }
 
-    saveText() {
-      // Implement your save logic here
-      console.log('Text saved:', this.credential);
-      this.solidservice.saveVc(this.credential);
-    }
 
     saveVcButtonClick() {
-      // This method will be executed when the button is clicked
-      console.log('Button clicked!');
+      console.log('Calling solidservice.saveVc() to try to save the vc');
+      this.solidservice.saveVc(this.credential);
     }
 
     cancelSaveVcClick() {
