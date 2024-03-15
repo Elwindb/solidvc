@@ -34,4 +34,4 @@ COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install -D @angular/cli
 EXPOSE 4200
-CMD [ "pnpm", "start" ]
+CMD [ "pnpm", "start", "--host", "0.0.0.0" ]
