@@ -7,17 +7,20 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-savevc',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './savevc.component.html',
   styleUrl: './savevc.component.css'
 })
 
 export class SavevcComponent {
     credential: string = "";
+    isLoading: boolean = false;
+  
 
     constructor(private credentialService: CredentialService, @Inject(SolidclientService) private solidservice: SolidclientService, private router: Router, private _snackBar: MatSnackBar) {
       credentialService.vc.then((result) => {
