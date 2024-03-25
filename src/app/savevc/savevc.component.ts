@@ -24,12 +24,13 @@ export class SavevcComponent {
 
     constructor(private credentialService: CredentialService, @Inject(SolidclientService) private solidservice: SolidclientService, private router: Router, private _snackBar: MatSnackBar) {
       credentialService.vc.then((result) => {
-
+        this.isLoading = true;
         this.credential = JSON.stringify(result);
 
         const options = { generateQR: true };
         getVCHTML(result, options).then((html: any) => { 
           this.credential = html.html;  
+          this.isLoading = false;
   
         }).catch((err: any) => { 
           this._snackBar.open("Failed to load credentials. Please try again.", "action");
