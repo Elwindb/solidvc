@@ -1,1 +1,7 @@
-<p>settings works!</p>
+<form class="example-form">
+    <mat-label>oidcIssuer</mat-label>
+    <input [(ngModel)]="oidcIssuer"  value="oidcIssuer" [ngModelOptions]="{standalone: true}">
+</form>
+  
+
+<button (click)="processLoginButtonClicked()" mat-stroked-button>Login</button> 

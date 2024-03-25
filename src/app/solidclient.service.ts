@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { writeFile } from 'fs/promises';
 import { getFile, isRawData, getContentType, getSourceUrl, Url, saveFileInContainer} from "@inrupt/solid-client";
+import { fetch } from '@inrupt/solid-client-authn-browser'
 //import { verifiable } from "@transmute/vc.js/src/index";
 //import { SigningAlgo  } from '@sphereon/did-auth-siop/dist/index';
 
@@ -41,6 +42,45 @@ async function saveVCinPod(vc: string) {
   } catch (err) {
     console.log(err);
   }
+
+}
+
+// Load verifiable credentials from Pod using authenitcated session
+async function readCredentialsFromPod(fileURL: string | Url) {
+
+  try {
+
+    // // Pod URI of the user
+    // const podUri = session.info.webId;
+
+    // // Known location of VC index file (replace with actual location)
+    // const vcIndexUrl = `${podUri}/.well-known/vc-index.json`;
+
+    // // Fetch VC index
+    // const vcIndexResponse = await getFetch(vcIndexUrl, { fetch: session.fetch });
+
+    // // Parse VC index data (assuming JSON format)
+    // const vcIndexes = await vcIndexResponse.json();
+
+    // // Loop through each VC index entry
+    // for (const vcIndex of vcIndexes) {
+    //   const vcUrl = `${podUri}/${vcIndex.path}`;
+
+    //   // Fetch VC data
+    //   const vcResponse = await getFetch(vcUrl, { fetch: session.fetch });
+
+    //   // Parse VC data (assuming JSON-LD format)
+    //   const verifiableCredential = await vcResponse.json();
+
+    //   // Process the retrieved verifiable credential data
+    //   console.log(verifiableCredential);
+
+    // }
+
+  } catch (error) {
+      throw error;
+  }
+
 
 }
 

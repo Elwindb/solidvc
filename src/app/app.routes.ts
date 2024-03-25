@@ -10,8 +10,8 @@ export const routes: Routes =
 [
     {path: 'credentials-request', component: CredentialRequestComponent},
     {path: 'credential-overview', component: CredentialOverviewComponent},
-    {path: 'credential-overview', component: CredentialOverviewComponent},
     {path: 'credential-presentation', component: CredentialPresentationComponent},
+    {path: 'settings', component: SettingsComponent},
     {path: 'savevc', component: SavevcComponent},
     {path: '', redirectTo: 'credential-overview', pathMatch: 'full'},
     {path: '**', component: PageNotFoundComponent}

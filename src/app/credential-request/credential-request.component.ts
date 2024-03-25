@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-credential-request',
@@ -18,24 +19,21 @@ import {MatDividerModule} from '@angular/material/divider';
 })
 export class CredentialRequestComponent {
   oidcRequest: string = '';
+  isDisabled: boolean = true;
 
-  constructor(private credentialService: CredentialService, private router: Router) {}
+  constructor(private credentialService: CredentialService, private router: Router, private _snackBar: MatSnackBar) {}
 
-  
-  ngOnInit(): void {
-   this.getHeroes();
-  }
 
-  getHeroes(): void {
-   
-   console.log("test");
-  }
 
   processOIDCRequest() {
-    this.credentialService.startRequest(this.oidcRequest);
 
-    this.router.navigate(['/savevc']);
+      this.credentialService.startRequest(this.oidcRequest);
+      this.router.navigate(['/savevc']);
 
+  }
+
+  scanQrCodeButtonClicked(){
+    console.log('not impelemented yet');
   }
 
 }
