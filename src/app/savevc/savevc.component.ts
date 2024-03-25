@@ -8,11 +8,13 @@ import {MatCardModule} from '@angular/material/card';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-savevc',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [MatCardModule, MatButtonModule, MatProgressSpinnerModule, CommonModule],
   templateUrl: './savevc.component.html',
   styleUrl: './savevc.component.css'
 })
