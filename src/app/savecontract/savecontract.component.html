@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>Save Contract</mat-card-title>
+  <mat-card-content>
+    <app-generic-thing-form (change)="onTriplesChange($event)" ></app-generic-thing-form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="saveVcButtonClick()">Save</button>
+    <button mat-button (click)="cancelSaveVcClick()">Cancel</button>
+  </mat-card-actions>
+</mat-card>

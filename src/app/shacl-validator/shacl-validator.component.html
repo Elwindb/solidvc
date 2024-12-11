@@ -1,0 +1,10 @@
+<div *ngIf="validationErrors.length > 0">
+    <h2>Validation Errors</h2>
+    <ul>
+      <li *ngFor="let error of validationErrors">{{ error }}</li>
+    </ul>
+  </div>
+  <div *ngIf="validationErrors.length === 0">
+    <h2>No validation errors. Data is valid!</h2>
+  </div>
+  

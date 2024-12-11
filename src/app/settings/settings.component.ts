@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-settings',
@@ -18,22 +19,15 @@ import { FormsModule } from '@angular/forms';
 export class SettingsComponent {
   oidcIssuer: string = '';
 
+  constructor(private loginService: LoginService) { }
+
   processLoginButtonClicked() {
-
-    startLogin(this.oidcIssuer);
-  }
-
-}
-
-
-async function startLogin(oidcIssuer: string) {
-  // Start the Login Process if not already logged in.
-  if (!getDefaultSession().info.isLoggedIn) {
-    await login({
-      oidcIssuer: oidcIssuer,
-      redirectUrl: new URL("/credential-overview", window.location.href).toString(),
-      clientName: "My application"
+    //loggin
+    console.log("Login button clicked");
+    this.loginService.login(this.oidcIssuer).then(() => {
+      console.log("Logged in");
     });
+
   }
 
 }

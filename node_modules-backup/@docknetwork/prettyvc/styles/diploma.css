@@ -1,0 +1,173 @@
+.prettyVC-diploma *,
+.prettyVC-diploma *::before,
+.prettyVC-diploma *::after {
+  font-family: Helvetica, sans-serif;
+}
+
+.prettyVC-diploma {
+  max-width: 38.75em;
+  width: 100%;
+  min-height: 12em;
+  background: #ffffff;
+  border-radius: 0.25em;
+  padding: 2em;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #18181B;
+  overflow: hidden;
+  font-size: inherit;
+  text-align: center;
+}
+
+.prettyVC-diploma-landscape {
+  max-width: 77.5em;
+}
+
+.prettyVC-diploma-subtext {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875em;
+  line-height: 20px;
+  color: #27272A;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 0.5em;
+}
+
+.prettyVC-diploma-footer {
+  margin-top: auto;
+  display: flex;
+  text-align: left;
+  padding-top: 2em;
+}
+
+.prettyVC-diploma-footersubject {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.9em;
+  line-height: 1.45em;
+  color: #71717A;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.prettyVC-diploma-footersubject-wrap {
+  display: flex;
+  margin-top: auto;
+  margin-right: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prettyVC-diploma-footersubject-wrap > strong {
+  font-style: normal;
+  font-weight: bold;
+  color: #27272A;
+}
+
+.prettyVC-diploma-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25em;
+  line-height: 28px;
+  color: inherit;
+  flex: none;
+  flex-grow: 0;
+  margin: 0.25em 0;
+  text-overflow: ellipsis;
+}
+
+.prettyVC-diploma-subtitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.25em;
+  line-height: 1.25em;
+  color: inherit;
+  flex: none;
+  flex-grow: 0;
+  margin: 0.25em 0;
+}
+
+.prettyVC-diploma-headerimage {
+  margin: 15px auto 20px auto;
+  border-radius: 100%;
+  width: 6em;
+}
+
+.prettyVC-diploma-qrimage {
+  margin-left: auto;
+  width: 8em;
+  flex-shrink: 0;
+}
+
+.prettyVC-diploma-qrimage-center {
+  width: 8em;
+  margin: 20px auto 0 auto;
+}
+
+.prettyVC-diploma-logo {
+  width: 3em;
+  height: 3em;
+  background: #FFFFFF;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.prettyVC-diploma-logo > img {
+  max-width: 100%;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.prettyVC-diploma table {
+  text-align: left;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.prettyVC-diploma td,
+.prettyVC-diploma th {
+  border: 1px solid #ddd;
+  padding: 0.75em;
+  height: 2.5em;
+  letter-spacing: 0.05em;
+  color: #71717A;
+  font-size: 0.875em;
+  line-height: 1.5em;
+  word-wrap: break-word;
+}
+
+.prettyVC-diploma tr {
+  background-color: transparent;
+  height: 3.1875em;
+}
+
+.prettyVC-diploma tr strong {
+  font-weight: 600;
+  color: #3F3F46;
+}
+
+.prettyVC-diploma th {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  text-align: left;
+  background-color: #FAFAFA;
+  font-style: normal;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-size: 0.75em;
+}

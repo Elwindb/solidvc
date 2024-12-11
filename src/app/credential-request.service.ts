@@ -5,6 +5,7 @@ import * as Jose from 'jose'
 import * as multibase from 'multibase';
 import * as multicodec from 'multicodec';
 import {  } from '@sphereon/oid4vci-common'; // Import the necessary module
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,7 +51,7 @@ async function testClient(uri: string) {
       authorizationRequest: authorizationRequestOpts,
       //kid: 'did:jwk:1235667890', // Our DID.  You can defer this also to when the acquireCredential method is called
       alg: Alg.EdDSA, // The signing Algorithm we will use. You can defer this also to when the acquireCredential method is called
-      clientId: 'test-clientId', // The clientId if the Authrozation Service requires it.  If a clientId is needed you can defer this also to when the acquireAccessToken method is called
+      clientId: '218232426', // The clientId if the Authrozation Service requires it.  If a clientId is needed you can defer this also to when the acquireAccessToken method is called
       retrieveServerMetadata: true, // Already retrieve the server metadata. Can also be done afterwards by invoking a method yourself.
     });
   
@@ -97,6 +98,27 @@ async function testClient(uri: string) {
       jti: '1234567890',
     });
   
+    //logging
+    console.log('credentialResponse');
+    console.log(credentialResponse);
+    //log the type of the credentialResponse
+    console.log(typeof credentialResponse.credential);
+
+    // Define the type of credentialResponse
+    const credentialResponseTyped = credentialResponse as { credential: { '@context': any[] } };
+
+    // Remove the second element from the context array
+    credentialResponseTyped.credential['@context'].splice(1, 1);
+
+    //make the context not an array but a string
+    //credentialResponseTyped.credential['@context'] = "https://www.w3.org/ns/credentials/examples/v2";
+
+
+    //new add a second element to the context array
+    credentialResponseTyped.credential['@context'].push("https://www.w3.org/ns/credentials/examples/v2");
+
+    console.log(credentialResponseTyped.credential as any);
+
     console.log(credentialResponse.credential as string);
   
     return credentialResponse.credential as string;
@@ -108,7 +130,6 @@ async function testClient(uri: string) {
 }
 
 async function signCallback(args: Jwt, kid: string): Promise<string> {
-
 
   return await new Jose.SignJWT({ ...args.payload })
   .setProtectedHeader({ alg: args.header.alg, typ: 'openid4vci-proof+jwt', kid: kid })
@@ -123,5 +144,3 @@ async function signCallback(args: Jwt, kid: string): Promise<string> {
 const callbacks: ProofOfPossessionCallbacks<JWTHeaderParameters> = {
   signCallback: signCallback as JWTSignerCallback, // Add type assertion
 };
-
-

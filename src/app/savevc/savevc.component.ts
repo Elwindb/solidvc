@@ -21,32 +21,43 @@ import { CommonModule } from '@angular/common';
 
 export class SavevcComponent {
     credential: string = "";
+    credentialHtml: string = "";
     isLoading: boolean = false;
   
 
-    constructor(private credentialService: CredentialService, @Inject(SolidclientService) private solidservice: SolidclientService, private router: Router, private _snackBar: MatSnackBar) {
-      credentialService.vc.then((result) => {
-        this.isLoading = true;
-        this.credential = JSON.stringify(result);
-
-        const options = { generateQR: true };
-        getVCHTML(result, options).then((html: any) => { 
-          this.credential = html.html;  
-          this.isLoading = false;
+    constructor(private credentialService: CredentialService, private solidservice: SolidclientService, private router: Router, private _snackBar: MatSnackBar) {
+       
+          credentialService.vc.then((result) => {
+          this.isLoading = true;
+          this.credential = result;//JSON.stringify(result);
+          
+          const options = { generateQR: true };
+          getVCHTML(this.credential, options).then((html: any) => { 
+            this.credentialHtml = html.html;
+            this.isLoading = false;
+    
+          }).catch((err: any) => { 
+            this._snackBar.open("Failed to load credentials. Please try again.", "action");
+            //nativate user back to the credentials-request page
+            //this.router.navigate(['/credentials-request']);
+          });
   
-        }).catch((err: any) => { 
-          this._snackBar.open("Failed to load credentials. Please try again.", "action");
-          //nativate user back to the credentials-request page
-          this.router.navigate(['/credentials-request']);
         });
-
-      });
     }
 
 
     saveVcButtonClick() {
       console.log('Calling solidservice.saveVc() to try to save the vc');
-      this.solidservice.saveVc(this.credential);
+
+      this.solidservice.saveVc(this.credential).then((result: any) => {
+        if (result) {
+          this._snackBar.open("Credential saved successfully", "Great");
+          this.router.navigate(['/credential-overview']);
+        } else {
+          this._snackBar.open("Failed to save credential. Please try again.", "OK");
+          this.router.navigate(['/credentials-request']);
+        }
+      });
     }
 
     cancelSaveVcClick() {
